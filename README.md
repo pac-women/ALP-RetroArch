@@ -1,9 +1,9 @@
 # ALP-RetroArch
 
-How to build RetroArch for ALP
+How To Build RetroArch for ALP
 
-- source: https://github.com/libretro/RetroArch.git
-- build step
+- Source: https://github.com/libretro/RetroArch.git
+- Build steps
 ```	
 # clone source code
 git clone https://github.com/libretro/RetroArch.git
@@ -23,4 +23,4 @@ make
 	**retroarch** 
   
 ## Note:
-  Bind to Core 4 and 5 for best performance on RK3399 SoC
+  this patch binds to Core 4 and 5 for best performance on RK3399 SoC
