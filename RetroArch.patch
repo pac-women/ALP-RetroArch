@@ -1,0 +1,31 @@
+diff --git a/retroarch.c b/retroarch.c
+index 978fdd2d33..38781b5b8a 100644
+--- a/retroarch.c
++++ b/retroarch.c
+@@ -200,6 +200,8 @@
+ #include "lakka.h"
+ #endif
+ 
++#include <sched.h>
++
+ #define _PSUPP(var, name, desc) printf("  %s:\n\t\t%s: %s\n", name, desc, var ? "yes" : "no")
+ 
+ #define FAIL_CPU(simd_type) do { \
+@@ -3782,6 +3784,17 @@ int rarch_main(int argc, char *argv[], void *data)
+    }
+ #endif
+ 
++   // PATCH RK3399
++	cpu_set_t cpu_set;
++	CPU_ZERO(&cpu_set);
++	CPU_SET(4, &cpu_set);
++	CPU_SET(5, &cpu_set);
++	//int temp = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpu_set);
++   if (sched_setaffinity(0, sizeof(cpu_set), &cpu_set) < 0) {
++		perror("sched_setaffinity");
++	}
++	//printf("setaffinity=%d\n", temp);
++
+    rtime_init();
+ 
+ #if defined(ANDROID)
